@@ -25,12 +25,13 @@ $("#find-city").on("click", function (event) {
     var tempHigh = (response.main.temp_max - 273.15) * 1.8 + 32;
     var tempLow = (response.main.temp_min - 273.15) * 1.8 + 32;
     var tempCurrent = (response.main.temp - 273.15) * 1.8 + 32;
+    var date = new Date();
     console.log("high", tempHigh);
     console.log("low", tempLow);
     console.log("current", tempCurrent);
     // Log the queryURL
     console.log(queryURL);
-    $(".city").html("<h1>" + response.name + " Weather Details</h1>");
+    $(".city").html("<h1>" + response.name + " Weather Details</h1>" + date);
     $(".temp").text("Current: " + Math.floor(tempCurrent) + "°F");
     $(".tempHigh").text("High: " + Math.floor(tempHigh) + "°F");
     $(".tempLow").text("Low: " + Math.floor(tempLow) + "°F");
