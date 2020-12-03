@@ -22,19 +22,23 @@ $("#find-city").on("click", function (event) {
     url: queryURL,
     method: "GET",
   }).then(function (response) {
+    var tempHigh = (response.main.temp_max - 273.15) * 1.8 + 32;
+    var tempLow = (response.main.temp_min - 273.15) * 1.8 + 32;
+    var tempCurrent = (response.main.temp - 273.15) * 1.8 + 32;
+    console.log(tempHigh);
+    console.log(tempLow);
+    console.log(tempCurrent);
     // Log the queryURL
     console.log(queryURL);
     $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-    $(".wind").text("Wind Speed: " + response.wind.speed);
+    $(".temp").text("Current temperature: " + tempCurrent);
+    $(".tempHigh").text("High: " + tempCurrent);
+    $(".tempLow").text("Low: " + tempCurrent);
     $(".humidity").text("Humidity: " + response.main.humidity);
 
     // Log the resulting object
     console.log(response);
-    var tempHigh = (response.main.temp_max - 273.15) * 1.8 + 32;
-    var tempLow = (response.main.temp_min - 273.15) * 1.8 + 32;
-    console.log(tempHigh);
-    console.log(tempLow);
-    $("#movie-view").text(JSON.stringify(response));
+    // $("#movie-view").text(JSON.stringify(response));
   });
 
   // -----------------------------------------------------------------------
