@@ -31,16 +31,52 @@ $("#find-city").on("click", function (event) {
     console.log("current", tempCurrent);
     // Log the queryURL
     console.log(queryURL);
-    $(".city").html("<h1>" + response.name + " Weather Details</h1>" + date);
+    $(".weather-details").append(`<div class="card">
+<div class="card-body">
+  <div id="movie-view"></div>
+  <h2>Weather Details</h2>
+  <div class="city"></div>
+  <div class="date"></div>
+  <div class="temp"></div>
+  <div class="tempHigh"></div>
+  <div class="tempLow"></div>
+  <div class="humidity"></div>
+</div>`);
+    $(".city").html("<h1>" + response.name + "</h1>");
+    $(".date").html("<h6>" + date + "</h6>");
     $(".temp").text("Current: " + Math.floor(tempCurrent) + "°F");
     $(".tempHigh").text("High: " + Math.floor(tempHigh) + "°F");
     $(".tempLow").text("Low: " + Math.floor(tempLow) + "°F");
     $(".humidity").text("Humidity: " + response.main.humidity + "%");
-
     // Log the resulting object
     console.log(response);
     // $("#movie-view").text(JSON.stringify(response));
   });
 
-  // -----------------------------------------------------------------------
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+  }).then(function (response) {
+    var tempHigh = (response.main.temp_max - 273.15) * 1.8 + 32;
+    var tempLow = (response.main.temp_min - 273.15) * 1.8 + 32;
+    var tempCurrent = (response.main.temp - 273.15) * 1.8 + 32;
+    var date = new Date();
+    console.log("high", tempHigh);
+    console.log("low", tempLow);
+    console.log("current", tempCurrent);
+    // Log the queryURL
+    console.log(queryURL);
+    $(".5day").append(`<div class="card">
+    <div class="card-body">
+      <h3>5 Day Forecast</h3>`);
+    $(".city").html("<h1>" + response.name + "</h1>");
+    $(".date").html("<h6>" + date + "</h6>");
+    $(".temp").text("Current: " + Math.floor(tempCurrent) + "°F");
+    $(".tempHigh").text("High: " + Math.floor(tempHigh) + "°F");
+    $(".tempLow").text("Low: " + Math.floor(tempLow) + "°F");
+    $(".humidity").text("Humidity: " + response.main.humidity + "%");
+    // Log the resulting object
+    console.log(response);
+    // $("#movie-view").text(JSON.stringify(response));
+  });
 });
