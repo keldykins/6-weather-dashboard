@@ -31,9 +31,9 @@ $("#find-city").on("click", function (event) {
     // Log the queryURL
     console.log(queryURL);
     $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-    $(".temp").text("Current temperature: " + tempCurrent);
-    $(".tempHigh").text("High: " + tempHigh);
-    $(".tempLow").text("Low: " + tempLow);
+    $(".temp").text("Current: " + Math.floor(tempCurrent) + "°F");
+    $(".tempHigh").text("High: " + Math.floor(tempHigh) + "°F");
+    $(".tempLow").text("Low: " + Math.floor(tempLow) + "°F");
     $(".humidity").text("Humidity: " + response.main.humidity + "%");
 
     // Log the resulting object
